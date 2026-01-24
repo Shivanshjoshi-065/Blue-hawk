@@ -22,7 +22,7 @@ module modulator(
 	// 		QPSK mod 				 	   
 	// --------------------------------- //  
 	wire signed [11:0] get_op_if;
-	// reg signed [11:0] reg_op_if; 
+	reg signed [11:0] reg_op_if; 
 	
 	qpsk_mod qpsk_mod_inst( 
 		.ip_signal(get_op_prbs), 
@@ -30,27 +30,16 @@ module modulator(
 		.ip_reset(ip_reset), 
 		.op_if(get_op_if)
 	);
-	
-	// --------------------------------- // 
-	// 		Bandpass filter  				 	   
-	// --------------------------------- //  
-	wire signed [12:0] get_op_bandpass;
-	reg signed [11:0] reg_op_bandpass; 
-	always@(posedge ip_clock or negedge ip_reset) begin 
-		if(ip_reset == 1'b0) begin 
-			reg_op_bandpass <= 12'd0;
+
+	always@(negedge ip_clock or negedge ip_reset) begin 
+		if(ip_reset == 1'd0) begin 
+			reg_op_if <= 12'd0;
 		end else begin 
-			reg_op_bandpass <= get_op_bandpass[12-:12];
+			reg_op_if <= get_op_if; 
 		end 
 	end 
-	
-	bandpass_filter bandpass_filter_inst( 
-		.ip_data(get_op_if),
-		.ip_clock(ip_clock), 
-		.ip_reset(ip_reset), 
-		.op_data(get_op_bandpass)	
-	);
 		
-	assign op_if = reg_op_bandpass;
+	assign op_if = reg_op_if;
 	
+
 endmodule 
