@@ -45,38 +45,7 @@ module agc_ref_correction_tb();
 		.ip_enable(sys_enable),
 		.op_if(get_op_if)
 	);
-	
-	/*
-	reg [2:0] reg_counter; 
-	always@(negedge sys_clock or negedge sys_reset) begin 
-		if(sys_reset == 1'b0) begin 
-			reg_counter <= 3'b0;
-		end else begin 
-			reg_counter <= reg_counter + 3'b001;
-		end 
-	end 
-	
-	reg signed [11:0] reg_op_value; 
-	always@(negedge sys_clock or negedge sys_reset) begin 
-		if(sys_reset == 1'b0) begin 
-			reg_op_value <= 12'd0;
-		end else begin 
-			case(reg_counter) begin 
-			3'b000 : begin 
-				reg_op_value <= 12'd50; 
-			end 
-			3'b011 : begin 
-				reg_op_value <= 12'd100;
-			end			
-			3'b101 : begin 
-				reg_op_value <= 12'd150; 
-			end 
-			3'b111 : begin 
-				reg_op_value <= 12'd200;
-			end 
-		end 	
-	end 
-	*/
+
 	
 	// ---------------------------------------------------------  
 	// 			Instantiate module : AGC ref correction				 	   
