@@ -5,10 +5,6 @@ module carrier_synchronizer(
 	output [11:0] op_real, 
 	output [11:0] op_imag
 ); 
-
-	// ------------------------------------  
-	// 			Feedback register 			 	   
-	// ------------------------------------   
 	
 	wire signed [11:0] get_op_cosine_wave; 
 	wire signed [11:0] get_op_sine_wave; 
